@@ -17,3 +17,6 @@ for usage look at:
 http://science.widener.edu/svb/stats/error.html
 
 http://lectureonline.cl.msu.edu/~mmp/labs/error/e2.htm
+
+Please note that this module is written in Python3 and will not directly work with python2 (You need to modify the code).
+And do not hasitate to ask if you want to some other functions to be added.
