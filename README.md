@@ -11,3 +11,9 @@ Functions:
 
 for usage look at:
 [main.py](https://github.com/mshemuni/Error-Analysis/blob/master/main.py).
+
+
+# Sources:
+http://science.widener.edu/svb/stats/error.html
+
+http://lectureonline.cl.msu.edu/~mmp/labs/error/e2.htm
