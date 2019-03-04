@@ -10,6 +10,9 @@ from numpy import power
 from numpy import log10
 from numpy import log
 
+from numpy import sin
+from numpy import cos
+
 class Etc():
     """Just to create a print_if function"""
     def __init__(self, verb=True):
@@ -20,6 +23,146 @@ class Etc():
         if self.verb:
             print(text)
 
+class Trigo():
+    """Trigonomoetric operations"""
+    def __init__(self, verb=True):
+        self.verb = verb
+        self.etc = Etc(verb=self.verb)
+        self.const = Constant(verb=self.verb)
+        self.minor = Minor(verb=self.verb)
+        
+    def rad2deg(self, val):
+        """Converts degree to radian"""
+        ret = self.minor.multiply(
+                self.minor.divide(val, self.const.pi()),
+                self.const.one80())
+        return(ret)
+        
+    def ar_rad2deg(self, vals):
+        """Converts degree to radian of an array"""
+        ret = []
+        for val in vals:
+            ret.append(ar(self.rad2deg(val)))
+            
+        ret = ar(ret)
+        
+        return(ret)
+        
+    def deg2rad(self, val):
+        """Converts radian to degree"""
+        ret = self.minor.multiply(
+                self.minor.divide(val, self.const.one80()),
+                self.const.pi())
+        return(ret)
+        
+    def ar_deg2rad(self, vals):
+        """Converts radian to degree of an array"""
+        ret = []
+        for val in vals:
+            ret.append(ar(self.deg2rad(val)))
+            
+        ret = ar(ret)
+        
+        return(ret)
+        
+    def sin(self, val, degree=False):
+        """Calculates SIN of a value and its errors"""
+        if degree:
+            val = self.deg2rad(val)
+        ret = sin(val[0]) * cos(val[1])
+        eret = sin(val[1]) * cos(val[0])
+        return(ar([ret, eret]))
+        
+    def ar_sin(self, vals, degree=False):
+        """Calculates SIN of a all values and their errors"""
+        ret = []
+        for val in vals:
+            ret.append(ar(self.sin_deg(val, degree=degree)))
+            
+        ret = ar(ret)
+        
+        return(ret)
+        
+    def cos(self, val, degree=False):
+        """Calculates COS of a value and its errors"""
+        if degree:
+            val = self.deg2rad(val)
+        the_sin = self.sin(val)
+        return(self.minor.power(self.minor.subtact([1, 0], self.minor.power(the_sin, 2)), 0.5))
+        
+    def ar_cos(self, vals, degree=False):
+        """Calculates COS of a all values and their errors(DEGREE)"""
+        ret = []
+        for val in vals:
+            ret.append(ar(self.cos_deg(val, degree=degree)))
+            
+        ret = ar(ret)
+        
+    def tan(self, val, degree=False):
+        """Calculates TAN of a value and its errors(DEGREE)"""
+        if degree:
+            val = self.deg2rad(val)
+        the_sin = self.sin(val)
+        the_cos = self.cos(val)
+        return(self.minor.divide(the_sin, the_cos))
+        
+    def ar_tan(self, vals, degree=False):
+        """Calculates TAN of a all values and their errors(DEGREE)"""
+        ret = []
+        for val in vals:
+            ret.append(ar(self.tan_deg(val, degree=degree)))
+            
+        ret = ar(ret)
+        
+        return(ret)
+        
+    def cot(self, val, degree=False):
+        if degree:
+            val = self.deg2rad(val)
+        the_sin = self.sin(val)
+        the_cos = self.cos(val)
+        return(self.minor.divide(the_cos, the_sin))
+        
+    def ar_cot(self, vals, degree=False):
+        ret = []
+        for val in vals:
+            ret.append(ar(self.cot_deg(val, degree=degree)))
+            
+        ret = ar(ret)
+        
+        return(ret)
+        
+    def sec(self, val, degree=False):
+        if degree:
+            val = self.deg2rad(val)
+        the_cos = self.cos(val)
+        return(self.minor.divide([1, 0], the_cos))
+        
+    def ar_sec(self, vals, degree=False):
+        ret = []
+        for val in vals:
+            ret.append(ar(self.sec_deg(val, degree=degree)))
+            
+        ret = ar(ret)
+        
+        return(ret)
+
+        
+    def cse(self, val, degree=False):
+        if degree:
+            val = self.deg2rad(val)
+        the_sin = self.sin(val)
+        return(self.minor.divide([1, 0], the_sin))
+        
+    def ar_cse(self, vals, degree=False):
+        ret = []
+        for val in vals:
+            ret.append(ar(self.cse_deg(val, degree=degree)))
+            
+        ret = ar(ret)
+        
+        return(ret)
+
 class Minor():
     """Minor operations"""
     def __init__(self, verb=True):
@@ -27,7 +170,7 @@ class Minor():
         self.etc = Etc(verb=self.verb)
         
     def sum(self, val1, val2):
-        """Calculates sum of two values abd their errors"""
+        """Calculates sum of two values and their errors"""
         try:
             ret = val1[0] + val2[0]
         except Exception as e:
@@ -82,9 +225,11 @@ class Minor():
         except Exception as e:
             self.etc.print_if(e)
             eret = None
-        
-        return(ar([ret, abs(eret)]))
-        
+        if eret is not None:
+            return(ar([ret, abs(eret)]))
+        else:
+            return(ar([ret, eret]))
+            
     def ar_multiply_inner(self, in_arr):
         """Calculates multipication of all values and 
         their error given in an array
@@ -197,6 +342,18 @@ class Constant():
         try:
             ret = 3.14159265
             eret = 10**-9
+        except Exception as e:
+            self.etc.print_if(e)
+            ret= None
+            eret = None
+        
+        return(ar([ret, eret]))
+        
+    def one80(self):
+        """Returns 180's value with 10^-9 error"""
+        try:
+            ret = 180
+            eret = 0
         except Exception as e:
             self.etc.print_if(e)
             ret= None
