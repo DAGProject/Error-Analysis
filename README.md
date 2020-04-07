@@ -18,7 +18,7 @@ Currently a python wheel or pip installation is available for this module is und
 
 # Usage <a class="anchor" id="usage"></a>
 Please refer to:
-* ?
+* https://github.com/DAGProject/Error-Analysis/blob/master/example.ipynb
 
 # Usage <a class="anchor" id="usage"></a>
 * http://science.widener.edu/svb/stats/error.html
