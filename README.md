@@ -1,26 +1,28 @@
 # Error-Analysis
-### This Module contains methods to calculates basic mathematical functions with error
+This Module contains methods to calculates basic mathematical functions with error
 
-Functions:
-- sum
-- subtract
-- multiply
-- divide
-- mean
-- stdv (STDV is an error itself. However in some cases, such as DIMM Calculations, changes in location driven from STDV of x, y coordinates and x and y coordinates has uncertainties and this error must be caaried after STDV calculation. http://www.astro.auth.gr/~seeing-gr/seeing_gr_files/theory/node13.html)
-- sin, cos, tan, cot, sec, cos (arcsin, arccos etc coming soon) and array vcersions
-- rad2deg, deg2rad and array vcersions
+Dependencies for this library:
+* [numpy](http://numpy.org)
 
-for usage look at:
-[main.py](https://github.com/mshemuni/Error-Analysis/blob/master/main.py).
+# Table of Contents:
+* [Introduction](#introduction)
+* [Installation](#installation)
+* [Usage](#usage)
+* [Sources](#sources)
 
+# Introduction <a class="anchor" id="introduction"></a>
+This Module contains methods to calculates basic mathematical functions with error
 
-# Sources:
-http://science.widener.edu/svb/stats/error.html
+# Installation <a class="anchor" id="installation"></a>
+Currently a python wheel or pip installation is available for this module is under development. Please download/clone it and use it as a directory under working directory or manually copy all files to neccessery locations.
 
-http://lectureonline.cl.msu.edu/~mmp/labs/error/e2.htm
+# Usage <a class="anchor" id="usage"></a>
+Please refer to:
+* ?
 
-https://math.stackexchange.com/questions/1045076/calculate-uncertainty-of-sine-function-result
-
+# Usage <a class="anchor" id="usage"></a>
+* http://science.widener.edu/svb/stats/error.html
+* http://lectureonline.cl.msu.edu/~mmp/labs/error/e2.htm
+* https://math.stackexchange.com/questions/1045076/calculate-uncertainty-of-sine-function-result
 Please note that this module is written in Python3 and will not directly work with python2 (You need to modify the code).
-And do not hasitate to ask if you want to some other functions to be added.
+And do not hesitate to ask if you want to some other functions to be added.
