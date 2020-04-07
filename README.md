@@ -20,7 +20,7 @@ Currently a python wheel or pip installation is available for this module is und
 Please refer to:
 * https://github.com/DAGProject/Error-Analysis/blob/master/example.ipynb
 
-# Usage <a class="anchor" id="usage"></a>
+# Sources <a class="anchor" id="sources"></a>
 * http://science.widener.edu/svb/stats/error.html
 * http://lectureonline.cl.msu.edu/~mmp/labs/error/e2.htm
 * https://math.stackexchange.com/questions/1045076/calculate-uncertainty-of-sine-function-result
